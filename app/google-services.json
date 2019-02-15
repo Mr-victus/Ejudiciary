@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "783290318894",
+    "firebase_url": "https://ejudiciary-66067.firebaseio.com",
+    "project_id": "ejudiciary-66067",
+    "storage_bucket": "ejudiciary-66067.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783290318894:android:cf945d29b04c0821",
+        "android_client_info": {
+          "package_name": "dev.cavemen.ejudiciary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783290318894-1pu56rcss1eonjp6h1gangnaoqj0595h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.cavemen.ejudiciary",
+            "certificate_hash": "f2c8085537f0ba53ce77a9111948b8d7b69e7a4a"
+          }
+        },
+        {
+          "client_id": "783290318894-4lvi43451gnsh24u09o7ollnnc3pbpo4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvEOdjTKEHEQXAE2i873jZr6sgR87ZIuI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783290318894-4lvi43451gnsh24u09o7ollnnc3pbpo4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
