@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/emaillogin"
         android:layout_width="283dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/passsword"
+        android:id="@+id/passswordlogin"
         android:layout_width="283dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"

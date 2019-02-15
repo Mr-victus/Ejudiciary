@@ -1,5 +1,6 @@
 package dev.cavemen.ejudiciary;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +57,9 @@ public class SignupUpActivity extends AppCompatActivity {
                             map.put("aadhar", aadhar.getText().toString());
 
                             reference.updateChildren(map);
+
+                            Intent i=new Intent(SignupUpActivity.this,LandingPage.class);
+                            startActivity(i);
 
 
                         }
