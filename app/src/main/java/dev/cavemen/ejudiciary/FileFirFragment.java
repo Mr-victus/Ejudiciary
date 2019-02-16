@@ -198,6 +198,7 @@ public class FileFirFragment extends Fragment {
                 DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("cases").child(""+cid);
                 nmap.put("uid",auth.getCurrentUser().getUid());
                 nmap.put("pid",policestationspinner.getSelectedItem().toString());
+                nmap.put("status","police");
                 reference1.updateChildren(nmap);
 
 

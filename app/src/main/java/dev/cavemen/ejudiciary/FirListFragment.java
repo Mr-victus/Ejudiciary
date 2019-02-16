@@ -31,7 +31,7 @@ public class FirListFragment extends Fragment {
 
     FirebaseAuth auth;
     RecyclerView recyclerView;
-    ArrayList<String> casenumberr, firno, firdescripton,name,epoch,uid;
+    ArrayList<String> casenumberr, firno, firdescripton,name,epoch,uid,statuss;
     FirListPoliceAdapter adapter;
 
     public FirListFragment() {
@@ -57,6 +57,7 @@ public class FirListFragment extends Fragment {
         name=new ArrayList<>();
         epoch=new ArrayList<>();
         uid=new ArrayList<>();
+        statuss=new ArrayList<>();
 
          recyclerView=view.findViewById(R.id.recyclerview);
 
@@ -72,9 +73,11 @@ public class FirListFragment extends Fragment {
                 epoch.clear();
                 casenumberr.clear();
                 uid.clear();
+                statuss.clear();
                 for(final DataSnapshot snapshot:dataSnapshot.getChildren()) {
 
                     final String caseno=snapshot.getKey();
+                    final String status=snapshot.child("status").getValue().toString();
                     Toast.makeText(getContext(),""+caseno,Toast.LENGTH_SHORT).show();
                     DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(snapshot.child("uid").getValue().toString());
                     reference1.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -86,12 +89,13 @@ public class FirListFragment extends Fragment {
                             firdescripton.add(dataSnapshot.child("cases").child(caseno).child("firdescription").getValue().toString());
                             epoch.add(dataSnapshot.child("cases").child(caseno).child("epoch").getValue().toString());
                             casenumberr.add(caseno);
+                            statuss.add(status);
                             uid.add(snapshot.child("uid").getValue().toString());
 
                             FragmentManager fragmentManager=getFragmentManager();
 
                             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            adapter = new FirListPoliceAdapter( casenumberr,firno,firdescripton,name,epoch,uid,getContext(),fragmentManager);
+                            adapter = new FirListPoliceAdapter( casenumberr,firno,firdescripton,name,epoch,uid,statuss,getContext(),fragmentManager);
                             recyclerView.setAdapter(adapter);
                         }
 
