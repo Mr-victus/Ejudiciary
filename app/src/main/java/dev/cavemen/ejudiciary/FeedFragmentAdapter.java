@@ -50,7 +50,7 @@ public class FeedFragmentAdapter extends RecyclerView.Adapter<FeedFragmentAdapte
     @NonNull
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(context).inflate(R.layout.customnewrecyclerview, parent, false);
+        view = LayoutInflater.from(context).inflate(R.layout.customfeedrecyclerview, parent, false);
 
 
         return new viewholder(view);
@@ -60,7 +60,7 @@ public class FeedFragmentAdapter extends RecyclerView.Adapter<FeedFragmentAdapte
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, final int position) {
 
-        //holder.file.setText(casedetail.get(position));
+        holder.file.setText(casedetail.get(position));
 
 
 
@@ -86,7 +86,7 @@ public class FeedFragmentAdapter extends RecyclerView.Adapter<FeedFragmentAdapte
         public viewholder(View itemView) {
             super(itemView);
 
-            //file=itemView.findViewById(R.id.cas);
+            file=itemView.findViewById(R.id.casedetailfeed);
 
 
         }
