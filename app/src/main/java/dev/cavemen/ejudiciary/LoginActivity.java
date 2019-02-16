@@ -97,8 +97,25 @@ public class LoginActivity extends AppCompatActivity {
 
                                     }
                                 });
-                                Intent i=new Intent(LoginActivity.this,LandingPage.class);
-                                startActivity(i);
+
+
+                                DatabaseReference reference3=FirebaseDatabase.getInstance().getReference().child("users").child("police").child(auth.getCurrentUser().getUid());
+                                reference3.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            Intent i=new Intent(LoginActivity.this,LandingPagePolice.class);
+                                            startActivity(i);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                /*Intent i=new Intent(LoginActivity.this,LandingPage.class);
+                                startActivity(i);*/
                             }
                     }
                 });

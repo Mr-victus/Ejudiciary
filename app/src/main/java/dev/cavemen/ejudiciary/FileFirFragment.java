@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,8 +28,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -89,8 +93,22 @@ public class FileFirFragment extends Fragment {
         submitfir=view.findViewById(R.id.submitfir);
         uploadfir=view.findViewById(R.id.uploadimage);
 
+
+        /*DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("users").child("police");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (dataSnapshot )
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
         arr.add("patia police station");
-        arr.add("shaheed nagar police station");
+
 
 
         ArrayAdapter<String> adapterBloodGroup = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,arr);
@@ -165,10 +183,16 @@ public class FileFirFragment extends Fragment {
                 map.put("firsubject",subjectfir.getText().toString());
                 map.put("firdescription",firdescription.getText().toString());
                 map.put("firtimestamp",System.currentTimeMillis());
-                map.put("epoch",System.currentTimeMillis());
+                map.put("epoch",System.currentTimeMillis()/1000);
                 map.put("policestation",policestationspinner.getSelectedItem().toString());
 
                 reference.updateChildren(map);
+
+
+                DatabaseReference reference11=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(auth.getCurrentUser().getUid()).child("cases").child(""+cid).child("events");
+                Map map2=new HashMap();
+                map2.put(String.valueOf(System.currentTimeMillis()/1000),"police");
+                reference11.updateChildren(map2);
 
                 Map nmap=new HashMap();
                 DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("cases").child(""+cid);
