@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         final EditText email,password;
         TextView signup;
         Spinner loginspinner;
-        loginspinner=findViewById(R.id.loginspinner);
 
         signup=findViewById(R.id.signup);
         email=findViewById(R.id.emaillogin);
@@ -51,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         ArrayAdapter<String> adapterBloodGroup = new ArrayAdapter<String>(LoginActivity.this, android.R.layout.simple_spinner_item,arr);
 
         adapterBloodGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        loginspinner.setAdapter(adapterBloodGroup);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
