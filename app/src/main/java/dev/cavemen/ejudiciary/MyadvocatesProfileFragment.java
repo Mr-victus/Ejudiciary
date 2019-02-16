@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,11 +41,39 @@ public class MyadvocatesProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         auth=FirebaseAuth.getInstance();
 
+        final TextView name,type,creditscore,yearsofex;
+
+
+        name=view.findViewById(R.id.name);
+        type=view.findViewById(R.id.type);
+        creditscore=view.findViewById(R.id.creditscore);
+        yearsofex=view.findViewById(R.id.yearsofex);
+
+
 
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(auth.getCurrentUser().getUid());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String aid=dataSnapshot.child("advocateuid").getValue().toString();
+
+
+                DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("advocate").child(aid);
+
+                reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        name.setText("Name :"+dataSnapshot.child("name").getValue().toString());
+                        type.setText("Type :"+dataSnapshot.child("category").getValue().toString());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
 

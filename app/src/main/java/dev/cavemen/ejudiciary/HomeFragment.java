@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
         myadvocates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment=new FileFirFragment();
+                Fragment fragment=new MyadvocatesProfileFragment();
 
                 getFragmentManager().beginTransaction().addToBackStack("HomeFragment").replace(R.id.fragment_container,fragment).commit();
             }

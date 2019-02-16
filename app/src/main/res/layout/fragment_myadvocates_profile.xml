@@ -23,7 +23,8 @@
         app:layout_constraintVertical_bias="0.189">
 
 
-        <EditText
+        <TextView
+            android:id="@+id/creditscore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,8 +43,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.398" />
 
-        <EditText
-            android:id="@+id/editText"
+        <TextView
+            android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -62,8 +63,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.181" />
 
-        <EditText
-            android:id="@+id/editText2"
+        <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
@@ -82,8 +83,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/editText3"
+        <TextView
+            android:id="@+id/yearsofex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -103,7 +104,7 @@
             app:layout_constraintVertical_bias="0.63" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/contact"
             android:layout_width="118dp"
             android:layout_height="18sp"
             android:layout_marginStart="8dp"
@@ -116,7 +117,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.944"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3"
+            app:layout_constraintTop_toBottomOf="@+id/yearsofex"
             app:layout_constraintVertical_bias="0.68" />
     </android.support.constraint.ConstraintLayout>
 
