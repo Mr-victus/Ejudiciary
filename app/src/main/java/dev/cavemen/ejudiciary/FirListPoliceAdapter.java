@@ -69,7 +69,7 @@ public class FirListPoliceAdapter extends RecyclerView.Adapter<FirListPoliceAdap
 
         holder.casenumber.setText("Case no. "+casenumberr.get(position));
         holder.fir.setText("Fir no :-"+firno.get(position));
-        holder.description.setText("Fir Description"+firdescripton.get(position));
+        holder.description.setText("Fir Description : "+firdescripton.get(position));
         holder.name.setText("Name :-"+name.get(position));
         Long timestamp = Long.valueOf(epoch.get(position))*1000;
         Calendar calendar = Calendar.getInstance();
@@ -91,12 +91,19 @@ public class FirListPoliceAdapter extends RecyclerView.Adapter<FirListPoliceAdap
             holder.accept.setVisibility(View.VISIBLE);
             holder.reject.setVisibility(View.VISIBLE);
         }
-        else  {
+        else if(status.get(position).equals("police accepted"))  {
             holder.accept.setVisibility(View.INVISIBLE);
             holder.reject.setVisibility(View.INVISIBLE);
 
             holder.assigncsi.setVisibility(View.VISIBLE);
 
+        }
+        else
+        {
+            holder.accept.setVisibility(View.INVISIBLE);
+            holder.reject.setVisibility(View.INVISIBLE);
+
+            holder.assigncsi.setVisibility(View.INVISIBLE);
         }
 
 

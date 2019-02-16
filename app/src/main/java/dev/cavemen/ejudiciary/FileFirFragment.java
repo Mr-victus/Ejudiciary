@@ -223,7 +223,7 @@ public class FileFirFragment extends Fragment {
                 Map map1=new HashMap();
                 map1.put("pid",policestationspinner.getSelectedItem().toString());
                 map1.put("uid",auth.getCurrentUser().getUid());
-                nmap.put("status","police");
+                map1.put("status","police");
                 reference2.updateChildren(map1);
 
 

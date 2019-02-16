@@ -59,7 +59,7 @@ public class AssignCsiFragment extends Fragment {
                 map.put("status","csi assigned");
                 reference.updateChildren(map);
 
-                DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("users").child("cases").child(uid).child("cases").child(casno).child("events");
+                DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(uid).child("cases").child(casno).child("events");
                 Map map1=new HashMap();
                 map1.put(""+System.currentTimeMillis(),"csi");
                 reference1.updateChildren(map1);
