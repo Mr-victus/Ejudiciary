@@ -8,11 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -23,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         final EditText email,password;
+        TextView signup;
+
+        signup=findViewById(R.id.signup);
         email=findViewById(R.id.emaillogin);
         password=findViewById(R.id.passswordlogin);
 
@@ -38,22 +47,76 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
+
+                                DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(auth.getCurrentUser().getUid());
+                                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            Intent i=new Intent(LoginActivity.this,LandingPage.class);
+                                            startActivity(i);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+                                DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("advocate").child(auth.getCurrentUser().getUid());
+                                reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            Intent i=new Intent(LoginActivity.this,LandingPage.class);
+                                            startActivity(i);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                DatabaseReference reference2=FirebaseDatabase.getInstance().getReference().child("users").child("judges").child(auth.getCurrentUser().getUid());
+
+                                reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            Intent i=new Intent(LoginActivity.this,LandingPage.class);
+                                            startActivity(i);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                                 Intent i=new Intent(LoginActivity.this,LandingPage.class);
                                 startActivity(i);
                             }
                     }
                 });
 
-
-
-
-
-
-
-
-
-
             }
         });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent i=new Intent(LoginActivity.this,SignupUpActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+
     }
 }
