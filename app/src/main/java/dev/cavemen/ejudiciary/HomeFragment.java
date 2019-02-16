@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     CustomPhotoAdapter customPhotoAdapter;
     Dialog dialog;
     FirebaseAuth auth;
-
+    Button myadvocates;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -56,11 +56,23 @@ public class HomeFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewpager);
         customPhotoAdapter=new CustomPhotoAdapter(getContext());
         viewPager.setAdapter(customPhotoAdapter);
-
+        auth=FirebaseAuth.getInstance();
         Button initiatecase=view.findViewById(R.id.initiatecase);
         final Button addadvocate=view.findViewById(R.id.addadvocate);
 
+        myadvocates=view.findViewById(R.id.myadvocates);
 
+
+
+
+        myadvocates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new FileFirFragment();
+
+                getFragmentManager().beginTransaction().addToBackStack("HomeFragment").replace(R.id.fragment_container,fragment).commit();
+            }
+        });
         addadvocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +90,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("users").child("advocate");
-                        reference.addValueEventListener(new ValueEventListener() {
+                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for(DataSnapshot snapshot:dataSnapshot.getChildren())
@@ -94,7 +106,7 @@ public class HomeFragment extends Fragment {
                                         databaseReference2.updateChildren(map);
 
 
-                                        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference().child("users").child("moderators").child(snapshot.getKey()).child("patients");
+                                        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference().child("users").child("advocate").child(snapshot.getKey()).child("users");
                                         Map kmap=new HashMap();
                                         kmap.put(auth.getCurrentUser().getUid(),0);
                                         databaseReference1.updateChildren(kmap);
@@ -107,7 +119,8 @@ public class HomeFragment extends Fragment {
 
                                         DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(auth.getCurrentUser().getUid());
                                         Map map2=new HashMap();
-                                        map2.put("advocate",snapshot.child("name"));
+                                        map2.put("advocate",snapshot.child("name").getValue().toString());
+                                        map2.put("advocateuid",snapshot.getKey());
                                         reference1.updateChildren(map2);
 
                                        // DatabaseReference reference2=FirebaseDatabase.getInstance().getReference().child("users").child("advocate")
