@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
     @Override
@@ -30,12 +34,25 @@ public class LoginActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         final EditText email,password;
         TextView signup;
+        Spinner loginspinner;
+        loginspinner=findViewById(R.id.loginspinner);
 
         signup=findViewById(R.id.signup);
         email=findViewById(R.id.emaillogin);
         password=findViewById(R.id.passswordlogin);
 
         Button login=findViewById(R.id.login);
+
+        ArrayList<String> arr=new ArrayList<>();
+        arr.add("user");
+        arr.add("police");
+        arr.add("judge");
+        arr.add("advocate");
+        ArrayAdapter<String> adapterBloodGroup = new ArrayAdapter<String>(LoginActivity.this, android.R.layout.simple_spinner_item,arr);
+
+        adapterBloodGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        loginspinner.setAdapter(adapterBloodGroup);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

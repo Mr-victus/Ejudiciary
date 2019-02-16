@@ -107,15 +107,32 @@ public class FileFirFragment extends Fragment {
             }
         });*/
 
-        arr.add("patia police station");
+        //arr.add("patia police station");
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("users").child("police");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arr.clear();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren())
+                arr.add(snapshot.child("name").getValue().toString());
+                ArrayAdapter<String> adapterBloodGroup = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,arr);
+
+                adapterBloodGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                policestationspinner.setAdapter(adapterBloodGroup);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
-        ArrayAdapter<String> adapterBloodGroup = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,arr);
 
-        adapterBloodGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        policestationspinner.setAdapter(adapterBloodGroup);
 
 
         uploadfir.setOnClickListener(new View.OnClickListener() {

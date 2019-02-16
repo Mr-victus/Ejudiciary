@@ -1,16 +1,31 @@
 package dev.cavemen.ejudiciary;
 
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -19,7 +34,8 @@ import android.widget.Button;
 public class HomeFragment extends Fragment {
 
     CustomPhotoAdapter customPhotoAdapter;
-
+    Dialog dialog;
+    FirebaseAuth auth;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,7 +58,77 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(customPhotoAdapter);
 
         Button initiatecase=view.findViewById(R.id.initiatecase);
+        final Button addadvocate=view.findViewById(R.id.addadvocate);
 
+
+        addadvocate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog=new Dialog(getContext());
+                dialog.setContentView(R.layout.addmoderatorpopup);
+
+                final EditText code;
+                Button submit;
+                code=dialog.findViewById(R.id.codeedtittext);
+                submit=dialog.findViewById(R.id.addbtnsubmit);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("users").child("advocate");
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot snapshot:dataSnapshot.getChildren())
+                                {
+                                    Log.d("Refferaal",snapshot.child("referral").getValue().toString());
+                                    if(snapshot.child("referral").getValue().toString().equals(code.getText().toString()))
+                                    {
+
+                                        Map map=new HashMap();
+                                        map.put(snapshot.getKey(),snapshot.child("name").getValue().toString());
+
+                                        DatabaseReference databaseReference2=FirebaseDatabase.getInstance().getReference().child("users").child("patients").child(auth.getCurrentUser().getUid()).child("moderators");
+                                        databaseReference2.updateChildren(map);
+
+
+                                        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference().child("users").child("moderators").child(snapshot.getKey()).child("patients");
+                                        Map kmap=new HashMap();
+                                        kmap.put(auth.getCurrentUser().getUid(),0);
+                                        databaseReference1.updateChildren(kmap);
+
+
+                                        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(auth.getCurrentUser().getUid()).child("events");
+                                        Map map1=new HashMap();
+                                        map1.put(""+System.currentTimeMillis()/1000,"Advocate added");
+                                        databaseReference.updateChildren(map1);
+
+                                        DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(auth.getCurrentUser().getUid());
+                                        Map map2=new HashMap();
+                                        map2.put("advocate",snapshot.child("name"));
+                                        reference1.updateChildren(map2);
+
+                                       // DatabaseReference reference2=FirebaseDatabase.getInstance().getReference().child("users").child("advocate")
+
+
+                                        dialog.dismiss();
+
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
 
         initiatecase.setOnClickListener(new View.OnClickListener() {
