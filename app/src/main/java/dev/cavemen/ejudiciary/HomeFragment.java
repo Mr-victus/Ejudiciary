@@ -58,9 +58,50 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(customPhotoAdapter);
         auth=FirebaseAuth.getInstance();
         Button initiatecase=view.findViewById(R.id.initiatecase);
+
+        Button legaladvice=view.findViewById(R.id.legaladvice);
+
         final Button addadvocate=view.findViewById(R.id.addadvocate);
 
         myadvocates=view.findViewById(R.id.myadvocates);
+
+        Button findadvocate=view.findViewById(R.id.findadvocate);
+
+
+
+        findadvocate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new AllAdvocatesFragment();
+
+                getFragmentManager().beginTransaction().addToBackStack("HomeFragment").replace(R.id.fragment_container,fragment).commit();
+            }
+        });
+
+
+        Button mycases=view.findViewById(R.id.mycases);
+
+
+        legaladvice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new LegalAdviceFragment();
+
+                getFragmentManager().beginTransaction().addToBackStack("HomeFragment").replace(R.id.fragment_container,fragment).commit();
+            }
+        });
+
+
+
+
+        mycases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new MyCasesFragment();
+
+                getFragmentManager().beginTransaction().addToBackStack("HomeFragment").replace(R.id.fragment_container,fragment).commit();
+            }
+        });
 
 
 

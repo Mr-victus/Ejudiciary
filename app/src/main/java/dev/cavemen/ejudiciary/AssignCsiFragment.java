@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -54,6 +55,12 @@ public class AssignCsiFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                DatabaseReference reference4=FirebaseDatabase.getInstance().getReference().child("cases").child(casno);
+                Map map4=new HashMap();
+                map4.put("status","csi assigned");
+                reference4.updateChildren(map4);
                 DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("firs").child(casno);
                 Map map=new HashMap();
                 map.put("status","csi assigned");
@@ -61,7 +68,7 @@ public class AssignCsiFragment extends Fragment {
 
                 DatabaseReference reference1=FirebaseDatabase.getInstance().getReference().child("users").child("users").child(uid).child("cases").child(casno).child("events");
                 Map map1=new HashMap();
-                map1.put(""+System.currentTimeMillis(),"csi");
+                map1.put(""+System.currentTimeMillis()/1000,"csi");
                 reference1.updateChildren(map1);
 
                 DatabaseReference reference22=FirebaseDatabase.getInstance().getReference().child("users").child("csi").child("rmPWzbkBDFNgKSBOBBXgblvCHYu2").child("cases").child(casno);
@@ -74,7 +81,7 @@ public class AssignCsiFragment extends Fragment {
                 Map map2=new HashMap();
                 map2.put("seizure list",des.getText().toString());
                 map2.put("medical report",med.getText().toString());
-                map2.put("epoch",System.currentTimeMillis());
+                map2.put("epoch",System.currentTimeMillis()/1000);
                 reference2.updateChildren(map2);
 
 

@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
-                                            Intent i=new Intent(LoginActivity.this,LandingPage.class);
+                                            Intent i=new Intent(LoginActivity.this,LandingPageAdvocate.class);
                                             startActivity(i);
                                         }
                                     }
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
-                                            Intent i=new Intent(LoginActivity.this,LandingPage.class);
+                                            Intent i=new Intent(LoginActivity.this,LandingPageJudge.class);
                                             startActivity(i);
                                         }
                                     }

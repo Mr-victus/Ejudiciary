@@ -199,7 +199,7 @@ public class FileFirFragment extends Fragment {
                 map.put("firno",fir);
                 map.put("firsubject",subjectfir.getText().toString());
                 map.put("firdescription",firdescription.getText().toString());
-                map.put("firtimestamp",System.currentTimeMillis());
+                map.put("firtimestamp",System.currentTimeMillis()/1000);
                 map.put("epoch",System.currentTimeMillis()/1000);
                 map.put("policestation",policestationspinner.getSelectedItem().toString());
 

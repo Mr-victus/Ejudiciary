@@ -32,6 +32,8 @@ public class FeedFragmentAdapter extends RecyclerView.Adapter<FeedFragmentAdapte
 
     Context context;
     View view;
+    int l=0;
+    int d=0;
 
 
     public FeedFragmentAdapter(Context context, ArrayList<String> filename) {
@@ -58,9 +60,47 @@ public class FeedFragmentAdapter extends RecyclerView.Adapter<FeedFragmentAdapte
 
 
     @Override
-    public void onBindViewHolder(@NonNull viewholder holder, final int position) {
+    public void onBindViewHolder(@NonNull final viewholder holder, final int position) {
 
         holder.file.setText(casedetail.get(position));
+
+
+
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.l==0)
+                {
+                    holder.like.setBackgroundResource(R.drawable.likered);
+                    holder.l++;
+
+                }
+                else
+                {
+                    holder.like.setBackgroundResource(R.drawable.likewhite);
+                    holder.l--;
+                }
+
+            }
+        });
+
+        holder.dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.d==0)
+                {
+                    holder.dislike.setBackgroundResource(R.drawable.dislikered);
+                    holder.d++;
+
+                }
+                else
+                {
+                    holder.dislike.setBackgroundResource(R.drawable.dislike);
+                    holder.d--;
+                }
+            }
+        });
 
 
 
@@ -81,12 +121,17 @@ public class FeedFragmentAdapter extends RecyclerView.Adapter<FeedFragmentAdapte
         Button callbtn;
         Dialog dialog;
         Layout layout;
-        Button submitbtn;
+        TextView like,dislike;
         EditText editText;
+        int l,d;
         public viewholder(View itemView) {
             super(itemView);
 
             file=itemView.findViewById(R.id.casedetailfeed);
+            like=itemView.findViewById(R.id.like);
+            dislike=itemView.findViewById(R.id.dislike);
+            l=0;
+            d=0;
 
 
         }

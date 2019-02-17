@@ -22,6 +22,7 @@
 
 
     <Button
+        android:id="@+id/mycases"
         android:layout_width="93dp"
         android:layout_height="93dp"
         android:layout_marginStart="8dp"
@@ -69,7 +70,7 @@
         app:layout_constraintVertical_bias="0.84" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/legaladvice"
         android:layout_width="93dp"
         android:layout_height="93dp"
         android:layout_marginStart="8dp"

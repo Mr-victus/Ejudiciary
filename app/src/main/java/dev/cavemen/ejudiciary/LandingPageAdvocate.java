@@ -38,7 +38,7 @@ public class LandingPageAdvocate extends AppCompatActivity {
                     selectedfragment = new NotificationFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedfragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_advocate,selectedfragment).commit();
             return true;
         }
 

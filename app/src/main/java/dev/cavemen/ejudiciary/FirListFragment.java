@@ -84,10 +84,10 @@ public class FirListFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             recyclerView.removeAllViews();
-                            name.add(dataSnapshot.child("name").getValue().toString());
-                            firno.add(dataSnapshot.child("cases").child(caseno).child("firno").getValue().toString());
-                            firdescripton.add(dataSnapshot.child("cases").child(caseno).child("firdescription").getValue().toString());
-                            epoch.add(dataSnapshot.child("cases").child(caseno).child("epoch").getValue().toString());
+                            name.add(""+dataSnapshot.child("name").getValue().toString());
+                            firno.add(""+dataSnapshot.child("cases").child(caseno).child("firno").getValue().toString());
+                            firdescripton.add(""+dataSnapshot.child("cases").child(caseno).child("firdescription").getValue().toString());
+                            epoch.add(""+dataSnapshot.child("cases").child(caseno).child("epoch").getValue().toString());
                             casenumberr.add(caseno);
                             statuss.add(status);
                             uid.add(snapshot.child("uid").getValue().toString());
